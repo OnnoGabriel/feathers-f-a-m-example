@@ -1,6 +1,6 @@
 # Feathers v4 with feathers-authentication-management (pre-release)
 
-A basic [Feathers](https://feathersjs.com/) v4 application with [Local Authentication](https://docs.feathersjs.com/api/authentication/local.html) and the pre-release version `4.0.0-pre.0` of the [feathers-authentication-management](https://github.com/feathersjs-ecosystem/feathers-authentication-management) (`f-a-m`) package for "sign up verification, forgotten password reset, and other capabilities for local authentication". The app uses [feathers-sequelize](https://github.com/feathersjs-ecosystem/feathers-sequelize) as a database adapter to MySQL.
+A basic [Feathers](https://feathersjs.com/) v4 application with [Local Authentication](https://docs.feathersjs.com/api/authentication/local.html) and the pre-release version `4.0.0-pre.0` of the [feathers-authentication-management](https://github.com/feathersjs-ecosystem/feathers-authentication-management) (`f-a-m`) package for "sign up verification, forgotten password reset, and other capabilities for local authentication". In this project, f-a-m uses e-mails for communication with the users. Moreover, the app uses [feathers-sequelize](https://github.com/feathersjs-ecosystem/feathers-sequelize) as a database adapter to MySQL.
 
 This project contains a `docker-compose.yaml` to start a Docker network with
 
