@@ -30,11 +30,11 @@ Open another terminal and run the database migration to create the users databas
 $ docker-compose exec server npm run db:migrate
 ```
 
-That's it. The Feathers app is running and connected to a local MySQL database.
+That's it. The Feathers app is running (see ([http://localhost:3030/](http://localhost:3030/)) and connected to a local MySQL database.
 
 # Run feathers-authentication-management Actions
 
-The file `curl-commands.sh` contains examples how to call the API with the `f-a-m` service. Please refer to the [new `f-a-m` documentation](https://feathers-a-m.netlify.app/) for more details regarding f-a-m.
+The file `curl-commands.sh` contains examples how to call the API with the `f-a-m` service. Please refer to the [new f-a-m documentation](https://feathers-a-m.netlify.app/) for more details regarding f-a-m.
 
 For example, to register a new user just call:
 
@@ -44,7 +44,7 @@ $ curl 'http://localhost:3030/users/' -H 'Content-Type: application/json' --data
 
 Feathers will create the new user and the `f-a-m` service will create a verification token and send it in an e-mail.
 
-You can see the new user in the database using PHPMyAdmin ([http://localhost:8025/](http://localhost:8025/), user: `root`, password: `test`).
+You can see the new user in the database using PHPMyAdmin ([http://localhost:8181/](http://localhost:8181/), user: `root`, password: `test`).
 
 Open the e-mail with Mailhog ([http://localhost:8025/](http://localhost:8025/)) and copy the token from the e-mail body.
 
