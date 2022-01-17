@@ -12,7 +12,6 @@ module.exports = (app) => {
           break;
 
         case "resendVerifySignup":
-          console.log("HI");
           return sendEmail({
             from: "test@localhost",
             to: user.email,
@@ -20,6 +19,14 @@ module.exports = (app) => {
             text: getLink("verify", user.verifyToken),
           });
           break;
+
+        case "verifySignup":
+          return sendEmail({
+            from: "test@localhost",
+            to: user.email,
+            subject: "E-mail address comfirmed",
+            text: "E-mail address comfirmed",
+          });
 
         case "sendResetPwd":
           return sendEmail({
