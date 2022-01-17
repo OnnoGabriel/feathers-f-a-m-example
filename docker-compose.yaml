@@ -1,0 +1,76 @@
+version: "3"
+
+services:
+  server:
+    image: node:lts-alpine3.9
+    depends_on:
+      - mailhog
+    volumes:
+      - ./server:/usr/src/app
+    working_dir: /usr/src/app
+    ports:
+      - "3030:3030"
+    environment:
+      VIRTUAL_HOST: api.localhost
+      VIRTUAL_PORT: 3030
+      NODE_ENV: development
+      PORT: 3030
+      MYSQL_STRING: mysql://root:test@mysql/server
+      FROM_EMAIL: "localhost@example.com"
+    command: "npm run dev"
+    networks:
+      - app
+
+  mysql:
+    image: mysql:8.0.15
+    environment:
+      VIRTUAL_HOST: mysql.localhost
+      MYSQL_ROOT_PASSWORD: "test"
+      MYSQL_DATABASE: "server"
+    cap_add:
+      - SYS_NICE # CAP_SYS_NICE
+    volumes:
+      - ./data-mysql:/var/lib/mysql
+    expose:
+      - 3306
+    networks:
+      - app
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    depends_on:
+      - mysql
+    links:
+      - mysql
+    volumes:
+      - /sessions
+    ports:
+      - 8181:80
+    environment:
+      VIRTUAL_HOST: pma.localhost
+      PMA_HOST: mysql
+    networks:
+      - app
+
+  mailhog:
+    image: mailhog/mailhog:v1.0.1
+    ports:
+      - 8025:8025
+    environment:
+      VIRTUAL_HOST: mailhog.localhost
+      VIRTUAL_PORT: 8025
+    networks:
+      - app
+
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    networks:
+      - app
+
+networks:
+  app:
